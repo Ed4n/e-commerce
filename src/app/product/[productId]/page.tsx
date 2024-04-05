@@ -1,5 +1,6 @@
 'use client'
 import { useProductsStore } from "@/store/productsStore";
+import { da } from "@faker-js/faker";
 import { useEffect, useState } from "react";
 
 
@@ -17,12 +18,27 @@ export default function SingleProduct({ params }: SingleProductProps): JSX.Eleme
     const [singleProduct, setSingleProduct] = useState<Product>()
 
     useEffect(() => {
-        const findProduct = (id: string) => {
-            const product: Product | undefined = products.find(product => product.id === id)
-            setSingleProduct(product)
+        const fetchById = (id) => {
+            fetch("http://localhost:3300/api/v1/products/" + id)
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error("Network response was not ok")
+                    }
+                    return res.json()
+                }
+                )
+                .then(
+                    data => {
+                        console.log(data)
+                        setSingleProduct(data)
+                    }
+                )
+                .catch(error => {
+                    console.error('There was a problem with your fetch operation:', error);
+                });
         }
 
-        findProduct(productId)
+        fetchById(productId)
     }, [products, productId])
 
     return (

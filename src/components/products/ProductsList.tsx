@@ -6,7 +6,7 @@ import { useGetProducts } from '@/hooks/useGetProducts';
 
 
 export default function ProductsList(): JSX.Element {
-    // const [products, setProducts] = useState<Product[]>([])
+
     const [products] = useGetProducts()
 
     return (

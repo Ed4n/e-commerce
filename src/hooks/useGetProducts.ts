@@ -15,7 +15,6 @@ const useGetProducts = () => {
             })
             .then(
                 data => saveProducts(data),
-
             )
 
     }, [saveProducts])

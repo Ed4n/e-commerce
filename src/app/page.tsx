@@ -14,7 +14,6 @@ export default function Home() {
         <HomeBackground />
         <HomeContent />
         <Nav />
-
         <SearchResults />
       </AppProvider>
     </main>
