@@ -1,26 +1,35 @@
+import { getAllProducts } from "@/api/productsFetch"
 import { useProductsStore } from "@/store/productsStore"
 import { useEffect, useState } from "react"
 
-const useGetProducts = () => {
 
+interface UseGetProducts {
+    products: Product[];
+    loading: boolean | undefined;
+    error: string | null;
+}
+
+const useGetProducts = (): UseGetProducts => {
     const { saveProducts, products } = useProductsStore()
+    const [error, setError] = useState<string | null>(null)
+    const [loading, setLoading] = useState<boolean | undefined>(true)
 
     useEffect(() => {
-        fetch('http://localhost:3300/api/v1/products')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network error.")
-                }
-                return response.json()
-            })
-            .then(
-                data => saveProducts(data),
-
-            )
+        const getProducts = async () => {
+            try {
+                const allProducts = await getAllProducts()
+                saveProducts(allProducts)
+            } catch (err: any) {
+                setError(err.message || 'An error occurred');
+            } finally {
+                setLoading(false)
+            }
+        }
+        getProducts()
 
     }, [saveProducts])
 
-    return [products]
+    return { products, loading, error }
 
 }
 

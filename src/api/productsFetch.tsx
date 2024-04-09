@@ -1,13 +1,15 @@
-const getAllProducts = async (saveProducts) => {
-    await fetch('http://localhost:3300/api/v1/products')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network error.")
-            }
-            return response.json()
-        })
-        .then(
-            data => saveProducts(data),
+const BASE_URL = 'http://localhost:3300/api/v1/products'
 
-        )
+
+export const getAllProducts = async (): Promise<Product[]> => {
+    try {
+        const res = await fetch(BASE_URL)
+        if (!res.ok) {
+            throw new Error("fail to fetch data")
+        }
+        const products = await res.json()
+        return products;
+    } catch (err: any) {
+        throw new Error(err.message || "An errror has ocurred")
+    }
 }
