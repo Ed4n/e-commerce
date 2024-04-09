@@ -9,7 +9,7 @@ export default function ProductsList(): JSX.Element {
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
-    if (!products) return null;
+    if (!products) return null!;
 
     return (
         <div className='flex gap-3 flex-wrap justify-center items-center'>
