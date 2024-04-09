@@ -6,16 +6,13 @@ import SearchBar from "@/components/search/SearchBar";
 import SearchResults from "@/components/search/SearchResults";
 
 import Image from "next/image";
+import Home from "./home";
 
-export default function Home() {
+export default function App() {
   return (
     <main >
       <AppProvider >
-        <HomeBackground />
-        <HomeContent />
-        <Nav />
-
-        <SearchResults />
+        <Home />
       </AppProvider>
     </main>
   );

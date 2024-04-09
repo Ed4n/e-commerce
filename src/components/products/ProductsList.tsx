@@ -4,6 +4,7 @@ import { useGetProducts } from '@/hooks/useGetProducts';
 // Assuming the Product type is defined in '@/types/Product'
 
 export default function ProductsList(): JSX.Element {
+
     const { products, loading, error } = useGetProducts();
 
     if (loading) return <div>Loading...</div>;

@@ -15,6 +15,7 @@ const useGetProducts = (): UseGetProducts => {
     const [loading, setLoading] = useState<boolean | undefined>(true)
 
     useEffect(() => {
+
         const getProducts = async () => {
             try {
                 const allProducts = await getAllProducts()
@@ -26,6 +27,7 @@ const useGetProducts = (): UseGetProducts => {
             }
         }
         getProducts()
+
 
     }, [saveProducts])
 
