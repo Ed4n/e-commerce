@@ -18,7 +18,7 @@ export default function SingleProduct({ params }: SingleProductProps): JSX.Eleme
     const [singleProduct, setSingleProduct] = useState<Product>()
 
     useEffect(() => {
-        const fetchById = (id) => {
+        const fetchById = (id: string) => {
             fetch("http://localhost:3300/api/v1/products/" + id)
                 .then(res => {
                     if (!res.ok) {
@@ -47,6 +47,8 @@ export default function SingleProduct({ params }: SingleProductProps): JSX.Eleme
             <p>{singleProduct?.id}</p>
             <p>{singleProduct?.name}</p>
             <p>{singleProduct?.price}</p>
+            <p>{singleProduct?.description}</p>
+
         </>
     )
 }
