@@ -14,8 +14,6 @@ export default function SearchResults({ }: Props): JSX.Element {
 
     const [searchResults, setSearchResults] = useState<Product[] | undefined>()
 
-
-
     useEffect(() => {
         handleSearchResults(searchInput)
     }, [searchInput])
@@ -23,7 +21,7 @@ export default function SearchResults({ }: Props): JSX.Element {
     const handleSearchResults = (name: string) => {
         const results = products.filter((item) => item.name.toLowerCase().includes(name.toLowerCase()))
         setSearchResults(results)
-        console.log(results)
+
     }
 
     return (

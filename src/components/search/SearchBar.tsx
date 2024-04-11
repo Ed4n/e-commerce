@@ -18,7 +18,7 @@ export default function SearchBar({ }: Props) {
 
     const handleChange = (e) => {
         setSearchInput(e.target.value)
-        console.log(searchInput)
+
     }
 
     return (
