@@ -21,7 +21,6 @@ export default function SearchResults({ }: Props): JSX.Element {
     const handleSearchResults = (name: string) => {
         const results = products.filter((item) => item.name.toLowerCase().includes(name.toLowerCase()))
         setSearchResults(results)
-
     }
 
     return (

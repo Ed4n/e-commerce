@@ -2,12 +2,12 @@
 
 import React, { useContext } from 'react'
 import { AppContext } from '../../context/AppContext'
-import { useGetProducts } from '@/hooks/products/useGetProducts'
+
 
 type Props = {}
 
 export default function SearchBar({ }: Props) {
-    const { products, loading, error } = useGetProducts()
+
 
     const { searchOpen, setSearchOpen, setSearchInput, searchInput } = useContext(AppContext)!
     // Here I add the "!" to the useContext(AppContext) because I know that it will never be undefined, but if you want to be safe you can add a condition to check if it is undefined and return null or something else.

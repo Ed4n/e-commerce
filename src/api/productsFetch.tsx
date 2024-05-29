@@ -27,14 +27,19 @@ export const getProductById = async (id: string) => {
     }
 }
 
+/**
+ * 
+ * @param limit 
+ * @returns A Promise of New Products
+ * @description 
+ * this approeach is using the following structure:
+ * return res.status(200).json({
+ * success: true,
+ * message: 'New Products Filtered Correctly.',
+ * data: newProducts
+})
+ */
 
-
-// this approeach is using the following structure:
-// return res.status(200).json({
-//     success: true,
-//     message: 'New Products Filtered Correctly.',
-//     data: newProducts
-// })
 export const getNewProducts = async (limit: number | null) => {
     let url = BASE_URL + "new"
     if (limit) {
@@ -55,3 +60,25 @@ export const getNewProducts = async (limit: number | null) => {
         throw new Error(err.message || "An error has ocurred")
     }
 }
+
+export const getProductsByArea = async (area: string, limit: number | null) => {
+    let url = BASE_URL + `productsByArea?area=${area}/`
+    if (limit) {
+        url += `?limit=${limit}`
+    }
+
+    try {
+        const res = await fetch(url)
+        if (!res.ok) {
+            throw new Error("fail to fetch data")
+        }
+        const newProducts = await res.json();
+        if (!newProducts.success) {
+            throw new Error(newProducts.message);
+        }
+        return newProducts.data;
+    } catch (err: any) {
+        throw new Error(err.message || "An error has ocurred")
+    }
+}
+

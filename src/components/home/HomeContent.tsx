@@ -35,19 +35,22 @@ export default function HomeContent({ }: Props): JSX.Element {
 
     const { newProducts, error, loading } = useGetNewProducts(4)
 
-    const NewArrivalData = {
+
+    const newArrivalProps = {
         title: "New Arrival",
+        area: "new-arrival",
         data: newProducts,
-        href: '/new',
+        href: '/area',
         error: error,
         loading: loading
     }
+
 
     return (
         <div ref={elementRef} className='w-full pb-16 pt-24 px-5 bg-white z-10 absolute lg:static mt-[150%] lg:mt-0 rounded-2xl shadow-xl'>
             <div className='absolute top-5 left-0 right-0 m-auto w-[50%] h-[5px] bg-gray-300 rounded-full'></div>
 
-            <CategoryComponent props={NewArrivalData} />
+            <CategoryComponent props={newArrivalProps} />
         </div>
     );
 }

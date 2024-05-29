@@ -1,10 +1,5 @@
 'use client'
-import { getProductById } from "@/api/productsFetch";
 import { useGetProductById } from "@/hooks/products/useGetProductById";
-import { useProductsStore } from "@/store/productsStore";
-import { da } from "@faker-js/faker";
-import { useEffect, useState } from "react";
-
 
 export type SingleProductProps = {
     params: { productId: string }

@@ -3,10 +3,12 @@ import ProductsList from "../ProductsList";
 import { useGetProducts } from "@/hooks/products/useGetProducts";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { title } from "process";
 
 interface Props {
     props: {
         title: string;
+        area: string
         data: Product[] | undefined;
         href: string;
         error: string | null
@@ -25,7 +27,7 @@ export default function CategoryComponent({ props }: Props): JSX.Element {
         <section className="flex flex-col w-full">
             <h1 className="mb-5">{props.title}</h1>
             <ProductsList data={props.data} />
-            <Link className="justify-self-end self-end mt-4" href={props.href}>see more</Link>
+            <Link className="justify-self-end self-end mt-4" href={props.href} as={`area/${props.area}`}>see more</Link>
         </section>
     )
 }
