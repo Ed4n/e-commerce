@@ -18,7 +18,7 @@ export default function SingleProduct({ params }: SingleProductProps): JSX.Eleme
 
     return (
         <>
-            <p>{product?.id}</p>
+            <p>{product?._id}</p>
             <p>{product?.name}</p>
             <p>{product?.price}</p>
             <p>{product?.description}</p>

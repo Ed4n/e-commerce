@@ -1,27 +1,43 @@
 const BASE_URL = 'http://localhost:3300/api/v1/products/'
 
 
-export const getAllProducts = async (): Promise<Product[]> => {
+export const getAllProducts = async (limit: number | null): Promise<Product[]> => {
+    let url = BASE_URL
+    if (limit) {
+        url += `?limit=${limit}`
+    }
+
     try {
-        const res = await fetch(BASE_URL)
+        const res = await fetch(url)
         if (!res.ok) {
             throw new Error("fail to fetch data")
         }
         const products = await res.json()
-        return products;
+        return products.data;
+
     } catch (err: any) {
         throw new Error(err.message || "An errror has ocurred")
     }
 }
 
-export const getProductById = async (id: string) => {
+export const getProductById = async (id: string): Promise<Product> => {
+    let url = `${BASE_URL}/${id}`
+
     try {
-        const res = await fetch(BASE_URL + id)
+        const res = await fetch(url)
+
         if (!res.ok) {
-            throw new Error("fail to fetch data")
+
+            throw new Error("fail to fetch data", res.statusText)
         }
-        const productById = res.json()
-        return productById
+        const productById = await res.json()
+        console.log("response", productById)
+        if (!productById.success) {
+            throw new Error(productById.message);
+        }
+
+        return productById.data;
+
     } catch (err: any) {
         throw new Error(err.message || "An error has ocurred")
     }
