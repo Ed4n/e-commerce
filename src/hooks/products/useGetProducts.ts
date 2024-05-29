@@ -32,7 +32,6 @@ const useGetProducts = (): UseGetProducts => {
     }, [saveProducts])
 
     return { products, loading, error }
-
 }
 
 export { useGetProducts }

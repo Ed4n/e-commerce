@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useContext, useEffect, useRef } from 'react';
-import ProductsList from '../products/ProductsList';
 import { AppContext } from '@/context/AppContext';
+import { useGetNewProducts } from '@/hooks/products/useGetNewProducts';
+import CategoryComponent from '../products/new-arrival/CategoryComponent';
 
 interface Props { }
 
@@ -30,13 +31,26 @@ function useElementTouchTop(elementRef: React.RefObject<HTMLDivElement>): boolea
 
 export default function HomeContent({ }: Props): JSX.Element {
     const elementRef = useRef<HTMLDivElement>(null);
-    const isElementTouchTop = useElementTouchTop(elementRef);
+    useElementTouchTop(elementRef);
+
+    const { newProducts, error, loading } = useGetNewProducts(4)
+
+
+    const newArrivalProps = {
+        title: "New Arrival",
+        area: "new-arrival",
+        data: newProducts,
+        href: '/area',
+        error: error,
+        loading: loading
+    }
+
 
     return (
         <div ref={elementRef} className='w-full pb-16 pt-24 px-5 bg-white z-10 absolute lg:static mt-[150%] lg:mt-0 rounded-2xl shadow-xl'>
             <div className='absolute top-5 left-0 right-0 m-auto w-[50%] h-[5px] bg-gray-300 rounded-full'></div>
-            <h2 className='text-3xl font-bold'>New Arrival</h2>
-            <ProductsList />
+
+            <CategoryComponent props={newArrivalProps} />
         </div>
     );
 }

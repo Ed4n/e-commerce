@@ -1,11 +1,13 @@
 'use client'
 
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { AppContext } from '../../context/AppContext'
+
 
 type Props = {}
 
 export default function SearchBar({ }: Props) {
+
 
     const { searchOpen, setSearchOpen, setSearchInput, searchInput } = useContext(AppContext)!
     // Here I add the "!" to the useContext(AppContext) because I know that it will never be undefined, but if you want to be safe you can add a condition to check if it is undefined and return null or something else.
@@ -18,7 +20,7 @@ export default function SearchBar({ }: Props) {
 
     const handleChange = (e) => {
         setSearchInput(e.target.value)
-        console.log(searchInput)
+
     }
 
     return (
