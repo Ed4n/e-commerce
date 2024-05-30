@@ -8,6 +8,7 @@ import { getAllProducts } from '@/api/productsFetch';
 import { useGetProducts } from '@/hooks/products/useGetProducts';
 import ProductsList from '../products/ProductsList';
 import { json } from 'stream/consumers';
+import AreaTitle from '../AreaTitle';
 
 interface Props { }
 
@@ -38,7 +39,7 @@ export default function HomeContent({ }: Props): JSX.Element {
     useElementTouchTop(elementRef);
 
     const { newProducts, error, loading } = useGetNewProducts(4)
-    const { products, error: allProductsError, loading: allProductsLoading } = useGetProducts(3)
+    const { products, error: allProductsError, loading: allProductsLoading } = useGetProducts(8)
 
 
 
@@ -58,9 +59,16 @@ export default function HomeContent({ }: Props): JSX.Element {
 
             <CategoryComponent props={newArrivalProps} />
 
-            <div>
+            <div className='flex flex-col gap-4 mt-12'>
+                <h1>You may like</h1>
                 <ProductsList data={products} />
             </div>
+            <div className='mt-12 flex flex-col gap-3'>
+                <AreaTitle img='./img/tech.jpg' title='Technology' />
+                <AreaTitle img='./img/gaming.jpg' title='Gaming' />
+                <AreaTitle img='./img/home.jpg' title='Home' />
+            </div>
+
         </div>
     );
 }
