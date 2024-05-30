@@ -11,9 +11,6 @@ interface Props {
     params: { area: string }
 }
 
-
-
-
 export default function Area({ params }: Props) {
     const { area } = params
 
@@ -49,6 +46,7 @@ export default function Area({ params }: Props) {
 
     return (
         <div>
+            <h1>Area Component</h1>
             {
                 JSON.stringify(products)
             }

@@ -1,6 +1,6 @@
 'use client'
 import { AppContext } from '@/context/AppContext'
-import { useGetProducts } from '@/hooks/products/useGetProducts'
+// import { useGetProducts } from '@/hooks/products/useGetProducts'
 import { useProductsStore } from '@/store/productsStore'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'

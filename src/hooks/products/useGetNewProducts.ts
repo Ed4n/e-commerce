@@ -19,7 +19,6 @@ const useGetNewProducts = (limit: number | null): UseGetNewProducts => {
         const getProducts = async (limit: number | null) => {
             try {
                 const allProducts = await getNewProducts(limit)
-                console.log(allProducts)
                 setNewProducts(allProducts)
             } catch (err: any) {
                 setError(err.message || 'An error occurred');

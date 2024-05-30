@@ -10,7 +10,7 @@ export default function Home() {
             <HomeBackground />
             <HomeContent />
             <Nav />
-            <SearchResults />
+            {/* <SearchResults /> */}
         </main>
     )
 }

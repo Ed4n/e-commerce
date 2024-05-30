@@ -1,5 +1,5 @@
 import Nav from "@/components/Nav";
-import { AppContext, AppProvider } from "../context/AppContext";
+import { AppProvider } from "../context/AppContext";
 import HomeBackground from "@/components/home/HomeBackground";
 import HomeContent from "@/components/home/HomeContent";
 import SearchBar from "@/components/search/SearchBar";

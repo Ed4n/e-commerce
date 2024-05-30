@@ -4,6 +4,10 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '@/context/AppContext';
 import { useGetNewProducts } from '@/hooks/products/useGetNewProducts';
 import CategoryComponent from '../products/new-arrival/CategoryComponent';
+import { getAllProducts } from '@/api/productsFetch';
+import { useGetProducts } from '@/hooks/products/useGetProducts';
+import ProductsList from '../products/ProductsList';
+import { json } from 'stream/consumers';
 
 interface Props { }
 
@@ -34,6 +38,8 @@ export default function HomeContent({ }: Props): JSX.Element {
     useElementTouchTop(elementRef);
 
     const { newProducts, error, loading } = useGetNewProducts(4)
+    const { products, error: allProductsError, loading: allProductsLoading } = useGetProducts(3)
+
 
 
     const newArrivalProps = {
@@ -51,6 +57,10 @@ export default function HomeContent({ }: Props): JSX.Element {
             <div className='absolute top-5 left-0 right-0 m-auto w-[50%] h-[5px] bg-gray-300 rounded-full'></div>
 
             <CategoryComponent props={newArrivalProps} />
+
+            <div>
+                <ProductsList data={products} />
+            </div>
         </div>
     );
 }

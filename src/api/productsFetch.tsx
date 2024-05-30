@@ -9,13 +9,20 @@ export const getAllProducts = async (limit: number | null): Promise<Product[]> =
 
     try {
         const res = await fetch(url)
+
         if (!res.ok) {
             throw new Error("fail to fetch data")
         }
         const products = await res.json()
+        if (!products.success) {
+            throw new Error(products.message);
+        }
+
         return products.data;
 
+
     } catch (err: any) {
+
         throw new Error(err.message || "An errror has ocurred")
     }
 }
@@ -27,11 +34,10 @@ export const getProductById = async (id: string): Promise<Product> => {
         const res = await fetch(url)
 
         if (!res.ok) {
-
             throw new Error("fail to fetch data", res.statusText)
         }
+
         const productById = await res.json()
-        console.log("response", productById)
         if (!productById.success) {
             throw new Error(productById.message);
         }

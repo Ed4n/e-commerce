@@ -1,9 +1,5 @@
-import { useGetNewProducts } from "@/hooks/products/useGetNewProducts";
 import ProductsList from "../ProductsList";
-import { useGetProducts } from "@/hooks/products/useGetProducts";
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { title } from "process";
 
 interface Props {
     props: {
