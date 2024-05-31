@@ -1,3 +1,5 @@
+import { ur } from "@faker-js/faker"
+
 const BASE_URL = 'http://localhost:3300/api/v1/products/'
 
 
@@ -99,6 +101,32 @@ export const getProductsByArea = async (area: string, limit: number | null) => {
             throw new Error(newProducts.message);
         }
         return newProducts.data;
+    } catch (err: any) {
+        throw new Error(err.message || "An error has ocurred")
+    }
+}
+
+export const getProductsByCategories = async (categories: string, limit: number | null) => {
+    const encodedCategories = encodeURIComponent(categories)
+    let url = BASE_URL + `categories?categories=${encodedCategories}`
+    if (limit !== null && limit !== undefined) {
+        url += `&limit=${limit}`;
+    }
+
+    console.log(url)
+
+    try {
+        const res = await fetch(url)
+        if (!res.ok) {
+            throw new Error("fail to fetch data")
+        }
+        const productsByCategories = await res.json();
+        if (!productsByCategories.success) {
+            throw new Error(productsByCategories.message);
+        }
+
+        console.log(productsByCategories)
+        return productsByCategories.data;
     } catch (err: any) {
         throw new Error(err.message || "An error has ocurred")
     }

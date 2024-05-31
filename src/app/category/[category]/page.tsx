@@ -8,30 +8,30 @@ import { json } from "stream/consumers"
 
 
 interface Props {
-    params: { area: string }
+    params: { category: string }
 }
 
 export default function Area({ params }: Props) {
-    const { area } = params
+    const { category } = params
 
     const [products, setProducts] = useState<Product[]>()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(true)
+    const [title, setTitle] = useState("")
 
     useEffect(() => {
-        switch (area) {
+        switch (category) {
             case "new-arrival":
                 fetchNewArrival()
+                setTitle("New Arrival")
                 break;
 
             default:
                 console.log('Unknown fruit.');
         }
-    }, [area])
+    }, [category])
 
     const fetchNewArrival = async () => {
-        console.log("new arrival")
-
         try {
             const allProducts = await getNewProducts()
             setProducts(allProducts)
@@ -46,7 +46,7 @@ export default function Area({ params }: Props) {
 
     return (
         <div>
-            <h1>Area Component</h1>
+            <h1>{title}</h1>
             {
                 JSON.stringify(products)
             }

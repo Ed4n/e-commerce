@@ -1,16 +1,21 @@
+'use client'
+
 import Nav from "@/components/Nav";
 import HomeBackground from "@/components/home/HomeBackground";
 import HomeContent from "@/components/home/HomeContent";
-import SearchResults from "@/components/search/SearchResults";
-import { AppProvider } from "@/context/AppContext";
+import Search from "@/components/search/Search";
+import { AppContext } from "@/context/AppContext";
+import { useContext } from "react";
 
 export default function Home() {
+    const { searchOpen } = useContext(AppContext)!;
+
     return (
         <main>
             <HomeBackground />
-            <HomeContent />
+            {!searchOpen ? <HomeContent /> : null}
             <Nav />
-            {/* <SearchResults /> */}
+            <Search />
         </main>
     )
 }

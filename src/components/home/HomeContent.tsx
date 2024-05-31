@@ -3,12 +3,13 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '@/context/AppContext';
 import { useGetNewProducts } from '@/hooks/products/useGetNewProducts';
-import CategoryComponent from '../products/new-arrival/CategoryComponent';
-import { getAllProducts } from '@/api/productsFetch';
+import CategoryComponent from '../products/CategoryComponent';
+import { getAllProducts, getProductsByCategories } from '@/api/productsFetch';
 import { useGetProducts } from '@/hooks/products/useGetProducts';
 import ProductsList from '../products/ProductsList';
 import { json } from 'stream/consumers';
 import AreaTitle from '../AreaTitle';
+import { useGetProductsByCategories } from '@/hooks/products/useGetProductsByCategories';
 
 interface Props { }
 
@@ -39,25 +40,34 @@ export default function HomeContent({ }: Props): JSX.Element {
     useElementTouchTop(elementRef);
 
     const { newProducts, error, loading } = useGetNewProducts(4)
+    const { productsByCategories, loading: categoriesLoading, error: categoriesError } = useGetProductsByCategories("Gaming & Consoles", null)
     const { products, error: allProductsError, loading: allProductsLoading } = useGetProducts(8)
-
 
 
     const newArrivalProps = {
         title: "New Arrival",
-        area: "new-arrival",
+        category: "new-arrival",
         data: newProducts,
-        href: '/area',
+        href: '/category',
         error: error,
         loading: loading
     }
 
+    const gamingAndConsoles = {
+        title: "Gaming & Consoles",
+        category: "Gaming & Consoles",
+        data: productsByCategories,
+        href: '/category',
+        error: categoriesError,
+        loading: categoriesError
+    }
 
     return (
         <div ref={elementRef} className='w-full pb-16 pt-24 px-5 bg-white z-10 absolute lg:static mt-[150%] lg:mt-0 rounded-2xl shadow-xl'>
             <div className='absolute top-5 left-0 right-0 m-auto w-[50%] h-[5px] bg-gray-300 rounded-full'></div>
 
             <CategoryComponent props={newArrivalProps} />
+            <CategoryComponent props={gamingAndConsoles} />
 
             <div className='flex flex-col gap-4 mt-12'>
                 <h1>You may like</h1>
