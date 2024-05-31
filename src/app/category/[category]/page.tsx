@@ -1,5 +1,5 @@
 'use client'
-import { getAllProducts, getNewProducts } from "@/api/productsFetch"
+import { getAllProducts, getNewProducts, getProductsByCategories } from "@/api/productsFetch"
 import ProductsList from "@/components/products/ProductsList"
 import { useGetNewProducts } from "@/hooks/products/useGetNewProducts"
 import { da } from "@faker-js/faker"
@@ -13,6 +13,7 @@ interface Props {
 
 export default function Area({ params }: Props) {
     const { category } = params
+    const decodedCategory = decodeURIComponent(category)
 
     const [products, setProducts] = useState<Product[]>()
     const [error, setError] = useState("")
@@ -27,13 +28,25 @@ export default function Area({ params }: Props) {
                 break;
 
             default:
-                console.log('Unknown fruit.');
+                fetchCategory(decodedCategory)
+                setTitle(decodedCategory)
         }
     }, [category])
 
     const fetchNewArrival = async () => {
         try {
-            const allProducts = await getNewProducts()
+            const allProducts = await getNewProducts(null)
+            setProducts(allProducts)
+        } catch (err: any) {
+            setError(err.message || 'An error occurred');
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    const fetchCategory = async (category) => {
+        try {
+            const allProducts = await getProductsByCategories(category, null)
             setProducts(allProducts)
         } catch (err: any) {
             setError(err.message || 'An error occurred');
@@ -47,9 +60,8 @@ export default function Area({ params }: Props) {
     return (
         <div>
             <h1>{title}</h1>
-            {
-                JSON.stringify(products)
-            }
+
+            <ProductsList data={products} />
         </div>
     )
 }

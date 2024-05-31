@@ -4,14 +4,8 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '@/context/AppContext';
 import { useGetNewProducts } from '@/hooks/products/useGetNewProducts';
 import CategoryComponent from '../products/CategoryComponent';
-import { getAllProducts, getProductsByCategories } from '@/api/productsFetch';
-import { useGetProducts } from '@/hooks/products/useGetProducts';
-import ProductsList from '../products/ProductsList';
-import { json } from 'stream/consumers';
 import AreaTitle from '../AreaTitle';
 import { useGetProductsByCategories } from '@/hooks/products/useGetProductsByCategories';
-
-interface Props { }
 
 function useElementTouchTop(elementRef: React.RefObject<HTMLDivElement>): boolean {
     const { isElementTouchTop, setIsElementTouchTop } = useContext(AppContext)!;
@@ -35,20 +29,17 @@ function useElementTouchTop(elementRef: React.RefObject<HTMLDivElement>): boolea
     return isElementTouchTop;
 }
 
-export default function HomeContent({ }: Props): JSX.Element {
+export default function HomeContent(): JSX.Element {
     const elementRef = useRef<HTMLDivElement>(null);
     useElementTouchTop(elementRef);
 
     const { newProducts, error, loading } = useGetNewProducts(4)
-    const { productsByCategories, loading: categoriesLoading, error: categoriesError } = useGetProductsByCategories("Gaming & Consoles", null)
-    const { products, error: allProductsError, loading: allProductsLoading } = useGetProducts(8)
-
+    const { productsByCategories, loading: categoriesLoading, error: categoriesError } = useGetProductsByCategories("Gaming & Consoles", 4)
 
     const newArrivalProps = {
         title: "New Arrival",
         category: "new-arrival",
         data: newProducts,
-        href: '/category',
         error: error,
         loading: loading
     }
@@ -57,9 +48,8 @@ export default function HomeContent({ }: Props): JSX.Element {
         title: "Gaming & Consoles",
         category: "Gaming & Consoles",
         data: productsByCategories,
-        href: '/category',
         error: categoriesError,
-        loading: categoriesError
+        loading: categoriesLoading
     }
 
     return (
@@ -69,16 +59,11 @@ export default function HomeContent({ }: Props): JSX.Element {
             <CategoryComponent props={newArrivalProps} />
             <CategoryComponent props={gamingAndConsoles} />
 
-            <div className='flex flex-col gap-4 mt-12'>
-                <h1>You may like</h1>
-                <ProductsList data={products} />
-            </div>
             <div className='mt-12 flex flex-col gap-3'>
                 <AreaTitle img='./img/tech.jpg' title='Technology' />
                 <AreaTitle img='./img/gaming.jpg' title='Gaming' />
                 <AreaTitle img='./img/home.jpg' title='Home' />
             </div>
-
         </div>
     );
 }

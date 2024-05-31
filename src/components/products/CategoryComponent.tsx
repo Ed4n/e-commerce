@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import ProductsList from "./ProductsList";
 import Link from "next/link";
 
@@ -7,7 +6,6 @@ interface Props {
         title: string;
         category: string
         data: Product[] | undefined;
-        href: string;
         error: string | null
         loading: boolean | undefined
     }
@@ -16,7 +14,7 @@ interface Props {
 
 export default function CategoryComponent({ props }: Props): JSX.Element {
 
-    const { title, category, data = [], href, error, loading } = props
+    const { title, category, data = [], error, loading } = props
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {props.error}</div>;
@@ -25,9 +23,8 @@ export default function CategoryComponent({ props }: Props): JSX.Element {
     return (
         <section className="flex flex-col w-full">
             <h1 className="mb-5">{title}</h1>
-
             <ProductsList data={data} />
-            <Link className="justify-self-end self-end mt-4" href={href} as={`category/${category}`}>see more</Link>
+            <Link className="justify-self-end self-end mt-4" href={"/category"} as={`category/${category}`}>see more</Link>
         </section>
     )
 }
