@@ -5,6 +5,7 @@ import { useProductsStore } from '@/store/productsStore'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 import ProductsList from '../products/ProductsList'
+import { useGetProductsByName } from '@/hooks/products/useGetProductsByName'
 
 type Props = {}
 
@@ -15,22 +16,23 @@ interface SearchResultsProps {
 
 export default function Search({ }: Props): JSX.Element {
 
-    const { loading, error } = useSaveProducts()
+    const { productsByName: products = [], loading, error } = useGetProductsByName(null)
 
-    const { products } = useProductsStore()
-
-    const { searchOpen, setSearchOpen, searchInput } = useContext(AppContext)!;
+    const { searchOpen, setSearchOpen, searchInput } = useContext(AppContext)! || null;
 
     const [searchResults, setSearchResults] = useState<Product[] | undefined>(undefined)
-
-    useEffect(() => {
-        handleSearchResults(searchInput)
-    }, [searchInput])
 
     const handleSearchResults = (name: string) => {
         const results = products.filter((item) => item.name.toLowerCase().includes(name.toLowerCase()))
         setSearchResults(results)
     }
+
+    useEffect(() => {
+        if (searchInput) {
+            handleSearchResults(searchInput)
+        }
+    }, [searchInput, products])
+
 
     return (
         <div className={(searchOpen ? 'flex' : 'hidden') + ' w-full h-screen bg-gray-300  justify-center items-center  z-10 fixed'}>
@@ -41,20 +43,21 @@ export default function Search({ }: Props): JSX.Element {
 
             {/* Results */}
             <SeacrhResults searchInput={searchInput} searchResults={searchResults} />
-
-
         </div>
     )
 }
 
-
-
 function SeacrhResults({ searchInput, searchResults = [] }: SearchResultsProps): JSX.Element {
     return (
-        <div className='w-full h-[80vh] mt-[30%] overflow-y-scroll'>
+        <div className='w-full h-[80vh] mt-[30%] flex flex-col overflow-y-scroll'>
             {
                 searchInput ? (
-                    searchResults.length > 0 ? <ProductsList data={searchResults} /> : <div>{searchInput} was not found</div>
+                    searchResults.length > 0 ? (
+                        searchResults.map((result, index) => (
+                            <Link key={index} href='product/[productId]' as={`product/${result._id}`} className='w-full py-5 px-7 border-b-[0.5px] text-black/60 border-b-white/50'>{result.name}</Link>
+                        )))
+
+                        : <div>{searchInput} was not found</div>
                 ) : <div>search something</div>
             }
         </div>

@@ -113,8 +113,6 @@ export const getProductsByCategories = async (categories: string, limit: number 
         url += `&limit=${limit}`;
     }
 
-    console.log(url)
-
     try {
         const res = await fetch(url)
         if (!res.ok) {
@@ -125,10 +123,33 @@ export const getProductsByCategories = async (categories: string, limit: number 
             throw new Error(productsByCategories.message);
         }
 
-        console.log(productsByCategories)
         return productsByCategories.data;
     } catch (err: any) {
         throw new Error(err.message || "An error has ocurred")
+    }
+}
+
+export const getProductsByName = async (limit: number | null) => {
+    let url = BASE_URL + 'names'
+
+    if (limit !== null && limit !== undefined) {
+        url += `?${limit}`
+    }
+
+    try {
+        const res = await fetch(url)
+        if (!res.ok) {
+            console.error("fail to fetch data")
+        }
+        const productsByName = await res.json()
+        if (!productsByName.success) {
+            console.error(productsByName.message)
+        }
+
+        return productsByName.data;
+
+    } catch (err: any) {
+        console.error(err.message || "An error has ocurred")
     }
 }
 

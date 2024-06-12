@@ -5,5 +5,5 @@ type Product = {
     price: number,
     category: string,
     area: string,
-    isNew: boolean
+    new: boolean
 }

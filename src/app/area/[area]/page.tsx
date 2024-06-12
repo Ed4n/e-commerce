@@ -11,7 +11,7 @@ interface Props {
     params: { category: string }
 }
 
-export default function Category({ params }: Props) {
+export default function Area({ params }: Props) {
     const { category } = params
     const decodedCategory = decodeURIComponent(category)
 

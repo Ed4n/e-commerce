@@ -1,6 +1,6 @@
 'use client'
 
-import Nav from "@/components/Nav";
+import HomeNav from "@/components/HomeNav";
 import HomeBackground from "@/components/home/HomeBackground";
 import HomeContent from "@/components/home/HomeContent";
 import Search from "@/components/search/Search";
@@ -14,7 +14,7 @@ export default function Home() {
         <main>
             <HomeBackground />
             {!searchOpen ? <HomeContent /> : null}
-            <Nav />
+            <HomeNav />
             <Search />
         </main>
     )
