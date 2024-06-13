@@ -3,13 +3,13 @@ import { Limelight } from "next/font/google";
 import { useEffect, useState } from "react"
 
 
-interface UseGetNewProducts {
+interface UseGetProductsByArea {
     productsByArea: Product[] | undefined;
     loading: boolean | undefined;
     error: string | null;
 }
 
-const useGetNewProducts = (area: string, limit: number | null,): UseGetNewProducts => {
+const useGetProductsByArea = (area: string, limit: number | null,): UseGetProductsByArea => {
     const [productsByArea, setproductsByArea] = useState<Product[]>()
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean | undefined>(true)
@@ -35,4 +35,4 @@ const useGetNewProducts = (area: string, limit: number | null,): UseGetNewProduc
     return { productsByArea, loading, error }
 }
 
-export { useGetNewProducts }
+export { useGetProductsByArea }

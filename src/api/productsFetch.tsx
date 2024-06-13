@@ -85,10 +85,11 @@ export const getNewProducts = async (limit: number | null) => {
     }
 }
 
-export const getProductsByArea = async (area: string, limit: number | null) => {
-    let url = BASE_URL + `productsByArea?area=${area}/`
-    if (limit) {
-        url += `?limit=${limit}`
+export const getProductsByAreas = async (areas: string, limit: number | null) => {
+    const encodedAreas = encodeURIComponent(areas)
+    let url = BASE_URL + `areas?areas=${encodedAreas}`
+    if (limit !== null && limit !== undefined) {
+        url += `&limit=${limit}`;
     }
 
     try {
@@ -96,11 +97,12 @@ export const getProductsByArea = async (area: string, limit: number | null) => {
         if (!res.ok) {
             throw new Error("fail to fetch data")
         }
-        const newProducts = await res.json();
-        if (!newProducts.success) {
-            throw new Error(newProducts.message);
+        const productsByAreas = await res.json();
+        if (!productsByAreas.success) {
+            throw new Error(productsByAreas.message);
         }
-        return newProducts.data;
+
+        return productsByAreas.data;
     } catch (err: any) {
         throw new Error(err.message || "An error has ocurred")
     }

@@ -8,11 +8,11 @@ import { json } from "stream/consumers"
 
 
 interface Props {
-    params: { category: string }
+    params: { category: string | undefined }
 }
 
 export default function Category({ params }: Props) {
-    const { category } = params
+    const { category = " " } = params
     const decodedCategory = decodeURIComponent(category)
 
     const [products, setProducts] = useState<Product[]>()
@@ -44,7 +44,7 @@ export default function Category({ params }: Props) {
         }
     }
 
-    const fetchCategory = async (category) => {
+    const fetchCategory = async (category: string) => {
         try {
             const allProducts = await getProductsByCategories(category, null)
             setProducts(allProducts)
@@ -54,6 +54,9 @@ export default function Category({ params }: Props) {
             setLoading(false)
         }
     }
+
+    if (loading) return <div> Loading...</div>
+    if (error) return null
 
     return (
         <div>

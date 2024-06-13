@@ -18,7 +18,7 @@ export default function Product({ product }: Props): JSX.Element {
 
     return (
 
-        <Link href='product/[productId]' as={`product/${product._id}`} className='w-[220px] h-[300px] bg-gray-300 rounded-lg overflow-hidden relative shadow-2xl' >
+        <Link href='product/[productId]' as={`/product/${product._id}`} className='w-[220px] h-[300px] bg-gray-300 rounded-lg overflow-hidden relative shadow-2xl' >
 
             <img className=' object-cover w-full h-full' src="https://picsum.photos/200/300" alt="product-image" />
             <div className='flex flex-col bg-white absolute text-sm bottom-0 left-0 h-[35%] w-full glass p-2'>

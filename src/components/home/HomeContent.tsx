@@ -60,9 +60,9 @@ export default function HomeContent(): JSX.Element {
             <CategoryComponent props={gamingAndConsoles} />
 
             <div className='mt-12 flex flex-col gap-3'>
-                <AreaTitle img='./img/tech.jpg' title={"tittle"} />
-                <AreaTitle img='./img/gaming.jpg' title='Gaming' />
-                <AreaTitle img='./img/home.jpg' title='Home' />
+                <AreaTitle img='./img/tech.jpg' area="Electronics" />
+                <AreaTitle img='./img/gaming.jpg' area='Gaming' />
+                <AreaTitle img='./img/home.jpg' area='Home' />
             </div>
         </div>
     );
