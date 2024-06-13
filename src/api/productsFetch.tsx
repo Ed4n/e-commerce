@@ -1,27 +1,51 @@
+import { ur } from "@faker-js/faker"
+
 const BASE_URL = 'http://localhost:3300/api/v1/products/'
 
 
-export const getAllProducts = async (): Promise<Product[]> => {
+export const getAllProducts = async (limit: number | null): Promise<Product[]> => {
+    let url = BASE_URL
+    if (limit) {
+        url += `?limit=${limit}`
+    }
+
     try {
-        const res = await fetch(BASE_URL)
+        const res = await fetch(url)
+
         if (!res.ok) {
             throw new Error("fail to fetch data")
         }
         const products = await res.json()
-        return products;
+        if (!products.success) {
+            throw new Error(products.message);
+        }
+
+        return products.data;
+
+
     } catch (err: any) {
+
         throw new Error(err.message || "An errror has ocurred")
     }
 }
 
-export const getProductById = async (id: string) => {
+export const getProductById = async (id: string): Promise<Product> => {
+    let url = `${BASE_URL}/${id}`
+
     try {
-        const res = await fetch(BASE_URL + id)
+        const res = await fetch(url)
+
         if (!res.ok) {
-            throw new Error("fail to fetch data")
+            throw new Error("fail to fetch data", res.statusText)
         }
-        const productById = res.json()
-        return productById
+
+        const productById = await res.json()
+        if (!productById.success) {
+            throw new Error(productById.message);
+        }
+
+        return productById.data;
+
     } catch (err: any) {
         throw new Error(err.message || "An error has ocurred")
     }
@@ -61,10 +85,11 @@ export const getNewProducts = async (limit: number | null) => {
     }
 }
 
-export const getProductsByArea = async (area: string, limit: number | null) => {
-    let url = BASE_URL + `productsByArea?area=${area}/`
-    if (limit) {
-        url += `?limit=${limit}`
+export const getProductsByAreas = async (areas: string, limit: number | null) => {
+    const encodedAreas = encodeURIComponent(areas)
+    let url = BASE_URL + `areas?areas=${encodedAreas}`
+    if (limit !== null && limit !== undefined) {
+        url += `&limit=${limit}`;
     }
 
     try {
@@ -72,13 +97,61 @@ export const getProductsByArea = async (area: string, limit: number | null) => {
         if (!res.ok) {
             throw new Error("fail to fetch data")
         }
-        const newProducts = await res.json();
-        if (!newProducts.success) {
-            throw new Error(newProducts.message);
+        const productsByAreas = await res.json();
+        if (!productsByAreas.success) {
+            throw new Error(productsByAreas.message);
         }
-        return newProducts.data;
+
+        return productsByAreas.data;
     } catch (err: any) {
         throw new Error(err.message || "An error has ocurred")
+    }
+}
+
+export const getProductsByCategories = async (categories: string, limit: number | null) => {
+    const encodedCategories = encodeURIComponent(categories)
+    let url = BASE_URL + `categories?categories=${encodedCategories}`
+    if (limit !== null && limit !== undefined) {
+        url += `&limit=${limit}`;
+    }
+
+    try {
+        const res = await fetch(url)
+        if (!res.ok) {
+            throw new Error("fail to fetch data")
+        }
+        const productsByCategories = await res.json();
+        if (!productsByCategories.success) {
+            throw new Error(productsByCategories.message);
+        }
+
+        return productsByCategories.data;
+    } catch (err: any) {
+        throw new Error(err.message || "An error has ocurred")
+    }
+}
+
+export const getProductsByName = async (limit: number | null) => {
+    let url = BASE_URL + 'names'
+
+    if (limit !== null && limit !== undefined) {
+        url += `?${limit}`
+    }
+
+    try {
+        const res = await fetch(url)
+        if (!res.ok) {
+            console.error("fail to fetch data")
+        }
+        const productsByName = await res.json()
+        if (!productsByName.success) {
+            console.error(productsByName.message)
+        }
+
+        return productsByName.data;
+
+    } catch (err: any) {
+        console.error(err.message || "An error has ocurred")
     }
 }
 

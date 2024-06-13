@@ -9,29 +9,29 @@ interface UseGetProducts {
     error: string | null;
 }
 
-const useGetProducts = (limit: number | null): UseGetProducts => {
-    const [products, setProducts] = useState<Product[] | undefined>()
+const useSaveProducts = (): UseGetProducts => {
+    const { saveProducts, products } = useProductsStore()
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean | undefined>(true)
 
     useEffect(() => {
 
-        const getProducts = async (limit: number | null) => {
+        const getProducts = async () => {
             try {
-                const allProducts = await getAllProducts(limit)
-                setProducts(allProducts)
+                const allProducts = await getAllProducts()
+                saveProducts(allProducts)
             } catch (err: any) {
                 setError(err.message || 'An error occurred');
             } finally {
                 setLoading(false)
             }
         }
-        getProducts(limit)
+        getProducts()
 
 
-    }, [limit])
+    }, [])
 
     return { products, loading, error }
 }
 
-export { useGetProducts }
+export { useSaveProducts }

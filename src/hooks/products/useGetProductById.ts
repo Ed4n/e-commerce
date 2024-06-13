@@ -21,6 +21,7 @@ export const useGetProductById = (id: string): UseGetProductById => {
                 setError(err.message || "An error has ocurred")
             } finally {
                 setLoading(false)
+
             }
         }
 

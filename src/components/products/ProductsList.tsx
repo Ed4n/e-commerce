@@ -1,6 +1,5 @@
 import React from 'react';
 import Product from './Product';
-import { useGetProducts } from '@/hooks/products/useGetProducts';
 // Assuming the Product type is defined in '@/types/Product'
 
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
 }
 
 
-export default function ProductsList({ data }: Props): JSX.Element {
+export default function ProductsList({ data = [] }: Props): JSX.Element {
 
     return (
         <div className='flex gap-3 flex-wrap justify-center items-center'>
