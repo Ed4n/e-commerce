@@ -24,7 +24,7 @@ export default function CategoryComponent({ props }: Props): JSX.Element {
 
     return (
         <section className="flex flex-col w-full">
-            <h1 className="mb-5">{title}</h1>
+            <h2 className="mb-5">{title}</h2>
             <ProductsList data={!isArea ? limitedData : data} />
             {/* Just add "/" before the rout if you want to be relative like this: as={`/category/${category}`. 
         IF you do like this as={`category/${category}` it will be nested to the previos window and will retour this:

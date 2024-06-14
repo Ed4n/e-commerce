@@ -2,6 +2,8 @@
 import { getProductsByAreas } from "@/api/productsFetch"
 import CategoryComponent from "@/components/products/CategoryComponent"
 import { useEffect, useState } from "react"
+import { ProductsByCategory } from "../ProductsByCategory"
+import { CategoriesList } from "@/components/products/CategoriesList"
 
 
 interface Props {
@@ -58,8 +60,8 @@ export default function Area({ params }: Props) {
     if (loading) return <div>Loading...</div>
     if (error) return <div>An error has occurred: {error}</div>
 
-    console.log(productsByCategory)
-    // console.log(Object.keys(productsByCategory))
+    const areaCategories = products.map((product) => product.category)
+
 
     return (
         <div>
@@ -72,23 +74,9 @@ export default function Area({ params }: Props) {
                 </div>
             </div>
             <div className=" bg-slate-100 w-full py-5 px-5 rounded-lg absolute z-20 flex flex-col gap-12 mt-[18vh]">
-                {/* Iterate over the keys (categories) in the productsByCategory object */}
-                {Object.keys(productsByCategory).map((category) => {
-                    // Create props for each category to pass to the CategoryComponent
-                    const categoryProps = {
-                        title: category, // The title of the category section is the same category name.
-                        category: category, // The category name
-                        data: productsByCategory[category], // The array of products for the current category
-                        error: null, // No error to pass
-                        isArea: true, // A flag indicating that this is an area category
-                        loading: false // Loading is set to false since data is already fetched
-                    };
+                <CategoriesList categories={areaCategories} />
+                <ProductsByCategory productsByCategory={productsByCategory} />
 
-                    // Return a CategoryComponent for each category with the generated props
-                    return (
-                        <CategoryComponent key={category} props={categoryProps} />
-                    );
-                })}
             </div>
         </div>
 

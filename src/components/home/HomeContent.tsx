@@ -41,7 +41,8 @@ export default function HomeContent(): JSX.Element {
         category: "new-arrival",
         data: newProducts,
         error: error,
-        loading: loading
+        loading: loading,
+        isArea: false
     }
 
     const gamingAndConsoles = {
@@ -49,7 +50,8 @@ export default function HomeContent(): JSX.Element {
         category: "Gaming & Consoles",
         data: productsByCategories,
         error: categoriesError,
-        loading: categoriesLoading
+        loading: categoriesLoading,
+        isArea: false
     }
 
     return (
@@ -61,8 +63,8 @@ export default function HomeContent(): JSX.Element {
 
             <div className='mt-12 flex flex-col gap-3'>
                 <AreaTitle img='./img/tech.jpg' area="Electronics" />
-                <AreaTitle img='./img/gaming.jpg' area='Gaming' />
-                <AreaTitle img='./img/home.jpg' area='Home' />
+                <AreaTitle img='./img/gaming.jpg' area='Automotive Accessories' />
+                <AreaTitle img='./img/home.jpg' area='Smart Home Devices' />
             </div>
         </div>
     );

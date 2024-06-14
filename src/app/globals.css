@@ -12,7 +12,7 @@ h1 {
 }
 
 h2 {
-    @apply text-2xl font-bold
+    @apply text-3xl font-bold
 }
 
 h4 {
@@ -58,4 +58,22 @@ h4 {
     padding: 10px;
     border: 1px solid #ddd;
     width: 200px;
+}
+
+
+
+@layer utilities {
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
 }
