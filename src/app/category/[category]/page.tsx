@@ -61,7 +61,6 @@ export default function Category({ params }: Props) {
     return (
         <div>
             <h1>{title}</h1>
-
             <ProductsList data={products} />
         </div>
     )
