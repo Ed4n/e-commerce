@@ -4,6 +4,8 @@ import CategoryComponent from "@/components/products/CategoryComponent"
 import { useEffect, useState } from "react"
 import { ProductsByCategory } from "../ProductsByCategory"
 import { CategoriesList } from "@/components/products/CategoriesList"
+import { CategoriesProvider } from "@/context/CategoriesContext"
+import { CategoriesRender } from "../CategoriesRender"
 
 
 interface Props {
@@ -64,21 +66,22 @@ export default function Area({ params }: Props) {
 
 
     return (
-        <div>
-            <div className="w-full h-[20vh] fixed">
-                <img className="w-full h-full object-cover" src="https://picsum.photos/200/300" alt="" />
-                <div className=" absolute top-0 w-full h-full bg-black/50 py-12 px-3 flex items-end">
-                    <h1 className=" text-white top-11 text-5xl">
-                        {decodedArea}
-                    </h1>
+        <CategoriesProvider>
+            <div className="">
+                <div className="w-full h-[20vh] fixed">
+                    <img className="w-full h-full object-cover" src="https://picsum.photos/200/300" alt="" />
+                    <div className=" absolute top-0 w-full h-full bg-black/50 py-12 px-3 flex items-end">
+                        <h1 className=" text-white top-11 text-5xl">
+                            {decodedArea}
+                        </h1>
+                    </div>
+                </div>
+                <div className=" bg-slate-100 w-full py-5 px-5 rounded-lg absolute z-20 flex flex-col gap-12 mt-[18vh]">
+                    <CategoriesList categories={areaCategories} />
+                    <CategoriesRender categories={productsByCategory} />
                 </div>
             </div>
-            <div className=" bg-slate-100 w-full py-5 px-5 rounded-lg absolute z-20 flex flex-col gap-12 mt-[18vh]">
-                <CategoriesList categories={areaCategories} />
-                <ProductsByCategory productsByCategory={productsByCategory} />
-
-            </div>
-        </div>
+        </CategoriesProvider>
 
     )
 }

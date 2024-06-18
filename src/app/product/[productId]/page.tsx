@@ -21,11 +21,11 @@ export default function SingleProduct({ params }: SingleProductProps): JSX.Eleme
     const { _id: id, name, description, price } = product;
 
     return (
-        <main className=" bg-slate-800 text-white w-full h-screen">
+        <main className=" bg-gray-500 text-gray-50 w-full h-screen">
             <div className="w-full h-[40vh]">
                 <img className="w-full h-full object-cover" src="https://picsum.photos/200/300" alt="" />
             </div>
-            <div className=" bg-slate-800 w-full h-[60vh] py-5 px-5 rounded-lg absolute -mt-5 z-20 flex flex-col gap-4">
+            <div className=" bg-gray-500 w-full h-[60vh] py-5 px-5 rounded-lg absolute -mt-5 z-20 flex flex-col gap-4">
 
                 <h2>{name}</h2>
                 <div className=" flex gap-3">
