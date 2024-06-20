@@ -23,10 +23,6 @@ h4 {
     @apply w-full h-[150px] rounded-2xl overflow-hidden relative
 }
 
-.nav-icon {
-    @apply w-[30px] h-[30px] fill-slate-600
-}
-
 .glass {
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.52);
