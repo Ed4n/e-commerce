@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '@/context/AppContext';
 import { useGetNewProducts } from '@/hooks/products/useGetNewProducts';
 import CategoryComponent from '../products/CategoryComponent';
-import AreaTitle from '../AreaTitle';
+import AreaTitle from '../products/AreaTitle';
 import { useGetProductsByCategories } from '@/hooks/products/useGetProductsByCategories';
 
 function useElementTouchTop(elementRef: React.RefObject<HTMLDivElement>): boolean {

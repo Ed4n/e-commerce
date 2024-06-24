@@ -25,10 +25,7 @@ const CategoriesRender: React.FC<CategoriesRenderProps> = ({ categories }) => {
         return categories
     };
 
-    // Example usage:
     const filteredCategories = filterCategories(categories, contextCategories);
-    console.log(filteredCategories);
-
 
     return (
         <ProductsByCategory productsByCategory={filteredCategories} />
