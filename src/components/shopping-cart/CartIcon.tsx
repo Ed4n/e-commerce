@@ -19,8 +19,6 @@ const CartIcon: React.FC<CartIconProps> = ({ iconColor }) => {
 
     const cartQuantity = cartItems.reduce((acc, item) => item.quantity + acc, 0)
 
-
-
     return (
         <Link className=" relative" href={"/shopping-cart"}>
             <svg className={`nav-icon first-line:w-[40px] h-[40px] ${iconColor}`} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

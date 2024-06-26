@@ -13,12 +13,6 @@ type ShoppingCartContextProps = {
     cartQuantity: number;
 }
 
-type CartItem = {
-    id: string;
-    quantity: number;
-}
-
-
 const ShoppingCartContext = createContext({} as ShoppingCartContextProps)
 
 const ShoppingCartProvider: React.FC<CategoriesProviderProps> = ({ children }) => {

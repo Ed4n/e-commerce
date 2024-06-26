@@ -7,3 +7,8 @@ type Product = {
     area: string,
     new: boolean
 }
+
+type CartItem = {
+    id: string;
+    quantity: number;
+}

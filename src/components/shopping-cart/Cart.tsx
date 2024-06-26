@@ -7,7 +7,7 @@ type CartProps = {
 
 const Cart: React.FC<CartProps> = ({ id }) => {
 
-    const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity } = useContext(ShoppingCartContext)
+    const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } = useContext(ShoppingCartContext)
 
     const quantity = getItemQuantity(id)
 
@@ -15,10 +15,13 @@ const Cart: React.FC<CartProps> = ({ id }) => {
 
         quantity > 0 ?
 
-            <div className=" flex gap-5 justify-center">
-                <button className="cart-button " onClick={() => decreaseCartQuantity(id)}> - </button>
-                <h2>{quantity}</h2>
-                <button className="cart-button" onClick={() => increaseCartQuantity(id)}> + </button>
+            <div className="flex flex-col gap-5">
+                <div className=" flex gap-5 justify-center">
+                    <button className="cart-button " onClick={() => decreaseCartQuantity(id)}> - </button>
+                    <h2>{quantity}</h2>
+                    <button className="cart-button" onClick={() => increaseCartQuantity(id)}> + </button>
+                </div>
+                <button onClick={() => removeFromCart(id)} className="  rounded-lg px-2 py-1 bg-slate-50 text-slate-500 text-lg">Remove</button>
             </div>
             :
             <button onClick={() => increaseCartQuantity(id)}>
