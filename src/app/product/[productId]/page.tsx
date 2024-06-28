@@ -47,10 +47,13 @@ export default function SingleProduct({ params }: SingleProductProps): JSX.Eleme
 
                     <p>{description}</p>
 
-                    <div className="w-full flex justify-between mt-12">
+                    <div className="w-full flex justify-between items-end mt-12">
                         <Cart id={id} />
 
-                        <button className="px-12 py-2 bg-white text-slate-800 rounded-full text-xl">Buy</button>
+                        <div className="flex flex-col gap-3">
+                            <span className="text-4xl font-bold justify-self-end self-end mr-3">${product.price}</span>
+                            <button className="px-12 py-2 bg-white text-slate-800 rounded-full text-xl">Buy</button>
+                        </div>
                     </div>
                 </div>
 

@@ -19,6 +19,7 @@ const ShoppingCartProvider: React.FC<CategoriesProviderProps> = ({ children }) =
 
     const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("shopping-cart", [])
 
+
     const cartQuantity = cartItems.reduce((acc, item) => item.quantity + acc, 0)
 
     /**
@@ -87,7 +88,7 @@ const ShoppingCartProvider: React.FC<CategoriesProviderProps> = ({ children }) =
                 increaseCartQuantity,
                 decreaseCartQuantity,
                 removeFromCart,
-                cartQuantity
+                cartQuantity,
             }} >
             {children}
         </ShoppingCartContext.Provider >
