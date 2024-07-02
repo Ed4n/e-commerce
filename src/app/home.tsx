@@ -12,10 +12,12 @@ export default function Home() {
 
     return (
         <main>
+
             <HomeBackground />
             {!searchOpen ? <HomeContent /> : null}
             <HomeNav />
             <Search />
+
         </main>
     )
 }

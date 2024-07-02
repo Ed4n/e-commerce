@@ -77,3 +77,33 @@ h4 {
         /* Firefox */
     }
 }
+
+.skeleton {
+    animation: skeleton-loading 1.2s linear infinite alternate;
+}
+
+.skeleton-2 {
+    animation: skeleton-loading-2 0.7s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: rgb(255, 255, 255);
+    }
+
+    100% {
+        background-color: rgb(241, 241, 241);
+    }
+}
+
+
+
+@keyframes skeleton-loading-2 {
+    0% {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    100% {
+        background-color: rgba(0, 0, 0, 0.088);
+    }
+}

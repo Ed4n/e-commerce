@@ -6,6 +6,8 @@ import { ProductsByCategory } from "../ProductsByCategory"
 import { CategoriesList } from "@/components/products/CategoriesList"
 import { CategoriesProvider } from "@/context/CategoriesContext"
 import { CategoriesRender } from "../CategoriesRender"
+import Link from "next/link"
+import { BackArrow } from "@/components/ui/BackArrow"
 
 
 interface Props {
@@ -70,7 +72,7 @@ export default function Area({ params }: Props) {
             <div className="">
                 <div className="w-full h-[20vh] fixed">
                     <img className="w-full h-full object-cover" src="https://picsum.photos/200/300" alt="" />
-                    <div className=" absolute top-0 w-full h-full bg-black/50 py-12 px-3 flex items-end">
+                    <div className=" absolute top-0 w-full h-full bg-black/50 py-12 px-3 flex  items-end">
                         <h1 className=" text-white top-11 text-5xl">
                             {decodedArea}
                         </h1>
