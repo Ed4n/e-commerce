@@ -1,19 +1,19 @@
 'use client'
 
 import React, { useContext } from 'react'
-import { AppContext } from '../../context/AppContext'
+import { useAppContext } from '../../context/AppContext'
 import { motion, AnimatePresence } from "framer-motion"
 
 type Props = {}
 
 export default function SearchBar({ }: Props) {
 
-    const { searchOpen, setSearchOpen, setSearchInput, searchInput, isElementTouchTop } = useContext(AppContext)!
-    // Here I add the "!" to the useContext(AppContext) because I know that it will never be undefined, but if you want to be safe you can add a condition to check if it is undefined and return null or something else.
+    const { searchOpen, setSearchOpen, setSearchInput, searchInput, isElementTouchTop } = useAppContext();
+
 
     const handleClick = (): void => setSearchOpen(true)
 
-    const handleChange = (e) => setSearchInput(e.target.value)
+    const handleChange = (e: any) => setSearchInput(e.target.value)
 
     const searchVariants = {
         hidden: { translateY: 200 },

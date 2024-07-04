@@ -1,10 +1,7 @@
 'use client'
-import { AppContext } from '@/context/AppContext'
-import { useSaveProducts } from '@/hooks/products/useSaveProducts'
-import { useProductsStore } from '@/store/productsStore'
+import { useAppContext } from '@/context/AppContext'
 import Link from 'next/link'
-import React, { useContext, useEffect, useState } from 'react'
-import ProductsList from '../products/ProductsList'
+import React, { useEffect, useState } from 'react'
 import { useGetProductsByName } from '@/hooks/products/useGetProductsByName'
 
 type Props = {}
@@ -18,7 +15,7 @@ export default function Search({ }: Props): JSX.Element {
 
     const { productsByName: products = [], loading, error } = useGetProductsByName(null)
 
-    const { searchOpen, setSearchOpen, searchInput } = useContext(AppContext)! || null;
+    const { searchOpen, setSearchOpen, searchInput } = useAppContext();
 
     const [searchResults, setSearchResults] = useState<Product[] | undefined>(undefined)
 

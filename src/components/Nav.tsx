@@ -6,14 +6,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CartIcon } from "./shopping-cart/CartIcon";
 import { ShoppingCartProvider } from "@/context/ShoppingCartContext";
-import { AppContext } from "@/context/AppContext";
-import { useContext } from "react";
-import { useOpenSearch } from "@/hooks/useOpenSearch";
+import { useAppContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
 
 
 export default function Nav() {
-    const { isElementTouchTop, setSearchOpen } = useContext(AppContext)!;
+    const { isElementTouchTop, setSearchOpen } = useAppContext();
     const currentPath = usePathname();
     const router = useRouter()
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/router';
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode, useContext } from 'react';
 
 interface AppContextType {
     searchOpen: boolean;
@@ -14,6 +14,13 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+const useAppContext = () => {
+    const context = useContext(AppContext);
+    if (!context) {
+        throw new Error('useAppContext must be used within an AppProvider');
+    }
+    return context;
+};
 
 
 const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -37,4 +44,4 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     );
 };
 
-export { AppContext, AppProvider };
+export { AppProvider, useAppContext };

@@ -1,8 +1,8 @@
-import { AppContext } from "@/context/AppContext"
-import { useContext, useEffect } from "react"
+import { useAppContext } from "@/context/AppContext"
+import { useEffect } from "react"
 
 export const useResetNavState = () => {
-    const { setIsElementTouchTop } = useContext(AppContext)!
+    const { setIsElementTouchTop } = useAppContext()
 
     useEffect(() => {
         setIsElementTouchTop(true)

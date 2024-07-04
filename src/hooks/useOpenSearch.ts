@@ -1,9 +1,9 @@
-import { AppContext } from "@/context/AppContext"
+import { useAppContext } from "@/context/AppContext"
 import { useRouter } from "next/router"
 import { useContext } from "react"
 
 export const useOpenSearch = () => {
-    const { setSearchOpen } = useContext(AppContext)!
+    const { setSearchOpen } = useAppContext();
     const router = useRouter()
 
     const openSearch = () => {

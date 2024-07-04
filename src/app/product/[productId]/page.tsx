@@ -1,11 +1,9 @@
 'use client'
 import Nav from "@/components/Nav";
 import { Cart } from "@/components/shopping-cart/Cart";
-import { AppContext, AppProvider } from "@/context/AppContext";
 import { ShoppingCartProvider } from "@/context/ShoppingCartContext";
 import { useGetProductById } from "@/hooks/products/useGetProductById";
 import { useResetNavState } from "@/hooks/useResetNavState";
-import { useContext, useEffect } from "react";
 
 export type SingleProductProps = {
     params: { productId: string }
