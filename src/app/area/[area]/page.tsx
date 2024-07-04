@@ -1,12 +1,11 @@
 'use client'
 import { getProductsByAreas } from "@/api/productsFetch"
-import CategoryComponent from "@/components/products/CategoryComponent"
 import { useEffect, useState } from "react"
-import { ProductsByCategory } from "../ProductsByCategory"
 import { CategoriesList } from "@/components/products/CategoriesList"
 import { CategoriesProvider } from "@/context/CategoriesContext"
 import { CategoriesRender } from "../CategoriesRender"
-
+import Nav from "@/components/Nav"
+import { useResetNavState } from "@/hooks/useResetNavState"
 
 interface Props {
     params: { area: string }
@@ -15,12 +14,12 @@ interface Props {
 export default function Area({ params }: Props) {
     const { area } = params
     const decodedArea = decodeURIComponent(area)
-
     const [products, setProducts] = useState<Product[]>([])
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(true)
     const [productsByCategory, setProductsByCategory] = useState<Record<string, Product[]>>({})
-    const [title, setTitle] = useState("")
+
+    useResetNavState()
 
     useEffect(() => {
         /**
@@ -70,7 +69,7 @@ export default function Area({ params }: Props) {
             <div className="">
                 <div className="w-full h-[20vh] fixed">
                     <img className="w-full h-full object-cover" src="https://picsum.photos/200/300" alt="" />
-                    <div className=" absolute top-0 w-full h-full bg-black/50 py-12 px-3 flex items-end">
+                    <div className=" absolute top-0 w-full h-full bg-black/50 py-12 px-3 flex  items-end">
                         <h1 className=" text-white top-11 text-5xl">
                             {decodedArea}
                         </h1>
@@ -80,6 +79,7 @@ export default function Area({ params }: Props) {
                     <CategoriesList categories={areaCategories} />
                     <CategoriesRender categories={productsByCategory} />
                 </div>
+                <Nav />
             </div>
         </CategoriesProvider>
 

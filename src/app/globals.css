@@ -23,10 +23,6 @@ h4 {
     @apply w-full h-[150px] rounded-2xl overflow-hidden relative
 }
 
-.nav-icon {
-    @apply w-[30px] h-[30px] fill-slate-600
-}
-
 .glass {
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.52);
@@ -60,6 +56,10 @@ h4 {
     width: 200px;
 }
 
+.cart-button {
+    @apply w-[35px] h-[35px] rounded-full border-2 border-gray-50 hover:bg-gray-50 hover:text-slate-400 text-2xl flex justify-center items-center cursor-pointer
+}
+
 
 
 @layer utilities {
@@ -75,5 +75,35 @@ h4 {
         /* IE and Edge */
         scrollbar-width: none;
         /* Firefox */
+    }
+}
+
+.skeleton {
+    animation: skeleton-loading 1.2s linear infinite alternate;
+}
+
+.skeleton-2 {
+    animation: skeleton-loading-2 0.7s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: rgb(255, 255, 255);
+    }
+
+    100% {
+        background-color: rgb(241, 241, 241);
+    }
+}
+
+
+
+@keyframes skeleton-loading-2 {
+    0% {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    100% {
+        background-color: rgba(0, 0, 0, 0.088);
     }
 }

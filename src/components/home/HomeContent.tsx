@@ -1,14 +1,15 @@
 'use client'
 
 import React, { useContext, useEffect, useRef } from 'react';
-import { AppContext } from '@/context/AppContext';
+import { AppContext, useAppContext } from '@/context/AppContext';
 import { useGetNewProducts } from '@/hooks/products/useGetNewProducts';
 import CategoryComponent from '../products/CategoryComponent';
-import AreaTitle from '../AreaTitle';
+import AreaTitle from '../products/AreaTitle';
 import { useGetProductsByCategories } from '@/hooks/products/useGetProductsByCategories';
+import ProductSkeleton from '../ui/skeletons/ProductSkeleton';
 
 function useElementTouchTop(elementRef: React.RefObject<HTMLDivElement>): boolean {
-    const { isElementTouchTop, setIsElementTouchTop } = useContext(AppContext)!;
+    const { isElementTouchTop, setIsElementTouchTop } = useAppContext();
 
     useEffect(() => {
         function handleScroll() {
@@ -56,10 +57,9 @@ export default function HomeContent(): JSX.Element {
 
     return (
         <div ref={elementRef} className='w-full pb-16 pt-24 px-5 bg-white z-10 absolute lg:static mt-[150%] lg:mt-0 rounded-2xl shadow-xl'>
-            <div className='absolute top-5 left-0 right-0 m-auto w-[50%] h-[5px] bg-gray-300 rounded-full'></div>
-
-            <CategoryComponent props={newArrivalProps} />
             <CategoryComponent props={gamingAndConsoles} />
+            <div className='absolute top-5 left-0 right-0 m-auto w-[50%] h-[5px] bg-gray-300 rounded-full'></div>
+            <CategoryComponent props={newArrivalProps} />
 
             <div className='mt-12 flex flex-col gap-3'>
                 <AreaTitle img='./img/tech.jpg' area="Electronics" />

@@ -55,13 +55,12 @@ export default function Category({ params }: Props) {
         }
     }
 
-    if (loading) return <div> Loading...</div>
     if (error) return null
 
     return (
-        <div>
+        <div className="flex flex-col gap-5 w-full max-w-[1150px] px-10 py-7">
             <h1>{title}</h1>
-            <ProductsList data={products} />
+            <ProductsList data={products} loading={loading} />
         </div>
     )
 }

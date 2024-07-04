@@ -15,7 +15,6 @@ interface Props {
 export default function CategoryComponent({ props }: Props): JSX.Element {
     const { title, category, data = [], error, loading, isArea } = props
 
-    if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
     if (!data) return null;
 
@@ -23,9 +22,9 @@ export default function CategoryComponent({ props }: Props): JSX.Element {
     const limitedData = data.slice(0, 4);
 
     return (
-        <section className="flex flex-col w-full">
+        <section className="flex flex-col w-full max-w-[1150px] px-10">
             <h2 className="mb-5">{title}</h2>
-            <ProductsList data={!isArea ? limitedData : data} />
+            <ProductsList data={!isArea ? limitedData : data} loading={loading} />
             {/* Just add "/" before the rout if you want to be relative like this: as={`/category/${category}`. 
         IF you do like this as={`category/${category}` it will be nested to the previos window and will retour this:
         http://localhost:3000/area/category/Networking%20&%20Internet%20Devices
