@@ -1,8 +1,11 @@
 'use client'
 import Nav from "@/components/Nav";
 import { Cart } from "@/components/shopping-cart/Cart";
+import { AppContext, AppProvider } from "@/context/AppContext";
 import { ShoppingCartProvider } from "@/context/ShoppingCartContext";
 import { useGetProductById } from "@/hooks/products/useGetProductById";
+import { useResetNavState } from "@/hooks/useResetNavState";
+import { useContext, useEffect } from "react";
 
 export type SingleProductProps = {
     params: { productId: string }
@@ -10,6 +13,9 @@ export type SingleProductProps = {
 };
 
 export default function SingleProduct({ params }: SingleProductProps): JSX.Element {
+
+    useResetNavState()
+
 
     const { productId } = params
 
@@ -21,7 +27,10 @@ export default function SingleProduct({ params }: SingleProductProps): JSX.Eleme
 
     const { _id: id, name, description, price } = product;
 
+
+
     return (
+
         <ShoppingCartProvider>
             <main className=" bg-gray-500 text-gray-50 w-full h-screen">
                 <div className="w-full h-[40vh]">
@@ -51,7 +60,7 @@ export default function SingleProduct({ params }: SingleProductProps): JSX.Eleme
                         <Cart id={id} />
 
                         <div className="flex flex-col gap-3">
-                            <span className="text-4xl font-bold justify-self-end self-end mr-3">${product.price}</span>
+                            <span className="text-4xl font-bold justify-self-end self-end mr-3">${price}</span>
                             <button className="px-12 py-2 bg-white text-slate-800 rounded-full text-xl">Buy</button>
                         </div>
                     </div>

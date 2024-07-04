@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import { ShoppingList } from "@/components/shopping-cart/ShoppingList";
 import { ShoppingResume } from "@/components/shopping-cart/ShoppingResume";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useResetNavState } from "@/hooks/useResetNavState";
 import { useEffect, useState } from "react";
 
 export default function ShoppingCart() {
@@ -15,7 +16,7 @@ export default function ShoppingCart() {
     const totalPrice = productsToShop.reduce((acc, item) => acc + item.price, 0)
     const totalQuantity = productsToShop.reduce((acc, item) => acc + item.quantity, 0)
 
-
+    useResetNavState()
 
     useEffect(() => {
         const fetchProducts = async () => {

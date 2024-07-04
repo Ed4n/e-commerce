@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/router';
 import React, { createContext, useState, ReactNode } from 'react';
 
 interface AppContextType {
@@ -12,6 +13,8 @@ interface AppContextType {
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
+
+
 
 const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [searchOpen, setSearchOpen] = useState(false);
