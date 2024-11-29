@@ -46,16 +46,16 @@ export default function Search({ }: Props): JSX.Element {
 
 function SeacrhResults({ searchInput, searchResults = [] }: SearchResultsProps): JSX.Element {
     return (
-        <div className='w-full h-[80vh] mt-[30%] flex flex-col overflow-y-scroll'>
+        <div className='w-full h-[80vh] mt-[30%] flex flex-col overflow-y-scroll px-5'>
             {
                 searchInput ? (
                     searchResults.length > 0 ? (
                         searchResults.map((result, index) => (
-                            <Link key={index} href='product/[productId]' as={`product/${result._id}`} className='w-full py-5 px-7 border-b-[0.5px] text-black/60 border-b-white/50'>{result.name}</Link>
+                            <Link key={index} href='product/[productId]' as={`product/${result._id}`} className='w-full py-5 px-7 border-b-[0.2px] text-black/60 border-b-slate-800/10 text-lg'>{result.name}</Link>
                         )))
 
-                        : <div>{searchInput} was not found</div>
-                ) : <div>search something</div>
+                        : <div className='w-full h-full flex justify-center items-start text-black/50 text-lg'>{searchInput} was not found</div>
+                ) : <div className='w-full h-full flex justify-center items-start text-black/50 text-lg'>Search Results will appear here</div>
             }
         </div>
     )
